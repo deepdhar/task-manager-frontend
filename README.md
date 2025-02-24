@@ -1,6 +1,6 @@
 # Task Manager App
 
-A simple and intuitive task management application built with **React Native** and **React Native Paper**. This app allows users to create, update, and delete tasks, as well as manage their accounts with features like login, signup, and password reset.
+An intuitive task management application built with **React Native** and **React Native Paper**. This app allows users to create, update, and delete tasks, as well as manage their accounts with features like login, signup, and password reset.
 
 ---
 
