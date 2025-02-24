@@ -47,8 +47,8 @@ Follow these steps to set up the project locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/task-manager-app.git
-   cd task-manager-app
+   https://github.com/deepdhar/task-manager-frontend.git
+   cd task-manager-frontend
    ```
    
 2. **Install dependencies**:
