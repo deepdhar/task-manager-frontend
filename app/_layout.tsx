@@ -1,10 +1,13 @@
+import { PaperProvider } from 'react-native-paper'
 import { AuthProvider } from '../context/AuthContext';
 import AppNavigator from '../navigation/AppNavigator';
 
 export default function RootLayout() {
   return (
-    <AuthProvider>
-      <AppNavigator />
-    </AuthProvider>
+    <PaperProvider>
+      <AuthProvider>
+        <AppNavigator />
+      </AuthProvider>
+    </PaperProvider>
   );
 }

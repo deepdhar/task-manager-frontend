@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Pressable, StatusBar } from 'react-native';
+import { View, StyleSheet, Pressable, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput, Button, Text } from "react-native-paper";
+
 
 export default function SignupScreen() {
   const navigation = useNavigation();
@@ -27,43 +29,61 @@ export default function SignupScreen() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#9088f1" />
-      <Text style={styles.header}>Sign Up</Text>
-      <Text style={styles.subtitle}>Name</Text>
+      <Text variant="headlineSmall" style={styles.header}>Sign Up</Text>
+      
       <TextInput 
+        label='Name'
+        mode="outlined"
         style={styles.inputBox}
         placeholder="name" 
         value={name} 
         onChangeText={setName} 
+        textColor="#1e1e1e"
+        theme={{ colors: { primary: '#1e1e1e' } }}
       />
-      <Text style={styles.subtitle}>Email</Text>
+      {/* <Text style={styles.subtitle}>Email</Text> */}
       <TextInput 
+        label='Email'
+        mode="outlined"
         style={styles.inputBox}
         placeholder="name@email.com" 
         value={email} 
         onChangeText={setEmail} 
+        keyboardType="email-address"
+        autoCapitalize="none"
+        textColor="#1e1e1e"
+        theme={{ colors: { primary: '#1e1e1e' } }}
       />
-      <Text style={styles.subtitle}>Password</Text>
+      {/* <Text style={styles.subtitle}>Password</Text> */}
       <TextInput 
+        label='Password'
+        mode="outlined"
         style={styles.inputBox}
         placeholder="password" 
         value={password} 
         onChangeText={setPassword} 
         secureTextEntry 
+        autoCapitalize="none"
+        textColor="#1e1e1e"
+        theme={{ colors: { primary: '#1e1e1e' } }}
       />
-      <Pressable 
-        style={[styles.button, loading && styles.disabledButton]} 
+      
+      <Button
+        mode="elevated"
         onPress={handleSignup}
+        loading={loading}
         disabled={loading}
+        style={[styles.button, loading && styles.disabledButton]}
+        labelStyle={{ color: '#1e1e1e', fontSize: 16 }}
       >
-        <Text style={{color: '#1e1e1e', fontSize: 16, fontWeight: '600',}}>
-          {loading ? 'Signing up...' : 'Sign up'}
-        </Text>
-      </Pressable>
+        {loading ? 'Signing up...' : 'Sign up'}
+      </Button>
       <Text 
+        variant='labelLarge'
         style={[styles.subtitle, {textAlign: 'center'}]} 
         onPress={() => navigation.navigate('Login')}
       >
-        Already have an account? <Text style={{color: '#fff', fontWeight: '600'}}>Login</Text>
+        Already have an account? <Text style={{color: '#fff', fontWeight: '700'}}>Login</Text>
       </Text>
     </View>
   );
@@ -71,11 +91,10 @@ export default function SignupScreen() {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#dcf881',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 25,
-    marginVertical: 10
+    width: '100%',
+    backgroundColor: "#dcf881",
+    alignItems: "center",
+    marginVertical: 10,
   },
   container: {
     flex: 1,
@@ -87,20 +106,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#bcbfb0'
   },
   header: {
-    fontSize: 25,
     textAlign: "center",
     fontWeight: "500",
     marginBottom: 25,
     color: '#fefefe'
   },
   inputBox: {
-    backgroundColor: '#EDF4ED',
+    backgroundColor: "#EDF4ED",
     marginBottom: 10,
-    borderRadius: 8,
-    padding: 12
+    borderRadius: 0,
+    elevation: 5
   },
   subtitle: {
-    fontSize: 14,
     marginBottom: 5,
     color: '#fefefe',
     fontWeight: '500'

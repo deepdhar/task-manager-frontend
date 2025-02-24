@@ -4,7 +4,6 @@ import {
   FlatList,
   Button,
   RefreshControl,
-  Text,
   StyleSheet,
   Pressable,
   StatusBar,
@@ -14,6 +13,7 @@ import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import {Text} from 'react-native-paper'
 
 // const API_URL = "http://192.168.1.8:5000";
 const API_URL = "https://task-manager-backend-k9tk.onrender.com";
@@ -107,7 +107,7 @@ export default function HomeScreen() {
           marginBottom: 20
         }}
       >
-        <Text style={styles.header}>Tasks</Text>
+        <Text variant="headlineLarge" style={styles.header}>Tasks</Text>
         <Pressable 
           onPress={()=> {
             logout()
@@ -137,13 +137,13 @@ export default function HomeScreen() {
             style={styles.itemCard}
             onPress={() => handleTaskPress(item._id)}
           >
-            <Text style={styles.title}>{item.title}</Text>
+            <Text variant='bodyMedium' style={styles.title}>{item.title}</Text>
             <View style={{height: 1, borderBottomColor: '#fefefe', borderWidth: 0.5, marginBottom: 5}}/>
-            <Text style={[styles.subtitle, {marginBottom: 20, color: '#fefefe'}]}>{item.description}</Text>
+            <Text variant="bodyMedium" style={[styles.subtitle, {marginBottom: 20, color: '#fefefe'}]}>{item.description}</Text>
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={styles.time}>{formatDate(item.updatedAt)}</Text>
-              <Text style={styles.time}>{formatTime(item.updatedAt)}</Text>
+              <Text variant="labelMedium" style={styles.time}>{formatDate(item.updatedAt)}</Text>
+              <Text variant="labelMedium" style={styles.time}>{formatTime(item.updatedAt)}</Text>
             </View>
           </Pressable>
         )}
@@ -181,7 +181,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#5a5a5a",
   },
   header: {
-    fontSize: 28,
     fontWeight: "600",
     color: '#fff000'
   },
@@ -200,19 +199,17 @@ const styles = StyleSheet.create({
     borderColor: '#f0f0f0'
   },
   subtitle: {
-    fontSize: 15,
     color: "#000",
     fontWeight: "400",
   },
   title: {
-    fontSize: 17,
-    fontWeight: "600",
+    fontSize: 16,
+    fontWeight: "700",
     color: "#fff",
     marginBottom: 5,
   },
   time: {
-    fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#fefefe',
   }
 });

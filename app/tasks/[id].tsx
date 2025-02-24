@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet, Pressable, StatusBar } from "react-native";
+import { View, StyleSheet, Pressable, StatusBar } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { TextInput, Button, Text, IconButton } from "react-native-paper";
 
 // const API_URL = "http://192.168.1.8:5000";
 const API_URL = "https://task-manager-backend-k9tk.onrender.com";
@@ -82,51 +83,67 @@ export default function TaskDetailScreen({ route }) {
       <StatusBar barStyle="light-content" backgroundColor="#9088f1" />
 
       <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: 10}}>
-        <Pressable onPress={()=>navigation.goBack()}>
-          <Ionicons name="arrow-back-outline" size={25} color="white" />
-        </Pressable>
-        <Text style={styles.header}>Edit Task</Text>
+        <IconButton
+          icon="arrow-left"
+          size={30}
+          onPress={() => navigation.goBack()}
+          style={{margin: 0, marginLeft: -5}}
+          iconColor="#fff"
+          theme={{colors: {primary: '#000'}}}
+        />
+        <Text variant="headlineMedium" style={styles.header}>Edit Task</Text>
         <View style={{width: 30}}/>
       </View>
 
       <View>
-        <Text style={styles.subtitle}>Title</Text>
+        
         <TextInput
+          label='Title'
+          mode="outlined"
           style={styles.inputBox}
           value={title}
           onChangeText={setTitle}
           placeholder="enter title"
-          placeholderTextColor={'#1e1e1e'}
+          placeholderTextColor={'gray'}
+          textColor="#1e1e1e"
+          theme={{ colors: { primary: '#1e1e1e',  background: '#EDF4ED'  } }}
         />
-        <Text style={styles.subtitle}>Description</Text>
+        
         <TextInput
+          label='Description'
+          mode="outlined"
           style={styles.inputBox}
           value={description}
           onChangeText={setDescription}
           placeholder="enter description"
-          placeholderTextColor={'#1e1e1e'}
+          placeholderTextColor={'gray'}
+          textColor="#1e1e1e"
+          theme={{ colors: { primary: '#1e1e1e',  background: '#EDF4ED'  } }}
         />
       </View>
 
       <View>
-        <Pressable
+        <Button
+          mode="elevated"
           onPress={handleUpdateTask}
-          style={[styles.button, loadingUpdate && styles.disabledButton]}
+          loading={loadingUpdate}
           disabled={loadingUpdate || loadingDelete}
+          style={[styles.button, loadingUpdate && styles.disabledButton]}
+          labelStyle={{ color: '#1e1e1e', fontSize: 16 }}
         >
-          <Text style={styles.buttonText}>
-            {loadingUpdate ? "Updating..." : "Update"}
-          </Text>
-        </Pressable>
-        <Pressable
+          {loadingUpdate ? "Updating..." : "Update"}
+        </Button>
+
+        <Button
+          mode="elevated"
           onPress={handleDeleteTask}
+          loading={loadingDelete}
+          disabled={loadingUpdate || loadingDelete}
           style={[styles.button, loadingDelete && styles.disabledButton]}
-          disabled={loadingDelete || loadingUpdate}
+          labelStyle={{ color: '#1e1e1e', fontSize: 16 }}
         >
-          <Text style={styles.buttonText}>
-            {loadingDelete ? "Deleting..." : "Delete"}
-          </Text>
-        </Pressable>
+          {loadingDelete ? "Deleting..." : "Delete"}
+        </Button>
       </View>
     </View>
   );
@@ -136,8 +153,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#dcf881",
     alignItems: "center",
-    padding: 15,
-    borderRadius: 25,
     marginTop: 10,
   },
   buttonText: {
@@ -162,8 +177,7 @@ const styles = StyleSheet.create({
   inputBox: {
     backgroundColor: "#EDF4ED",
     marginBottom: 10,
-    borderRadius: 8,
-    padding: 12,
+    elevation: 5
   },
   subtitle: {
     fontSize: 15,

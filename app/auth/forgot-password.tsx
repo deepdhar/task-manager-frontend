@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Pressable, Text, StyleSheet, StatusBar } from 'react-native';
+import { View, Pressable, StyleSheet, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { TextInput, Button, Text } from "react-native-paper";
+
 
 // const API_URL = "http://192.168.1.8:5000";
 const API_URL = "https://task-manager-backend-k9tk.onrender.com";
@@ -36,36 +38,42 @@ export default function ForgotPasswordScreen() {
           <Ionicons name="arrow-back-outline" size={30} color="black" />
         </Pressable>
         <View>
-          <Text style={styles.header}>Forgot Password</Text>
+          <Text variant="headlineSmall" style={styles.header}>Forgot Password</Text>
           
-          <Text style={styles.subtitle}>Email</Text>
+          {/* <Text style={styles.subtitle}>Email</Text> */}
           <TextInput
+            label='Email'
+            mode="outlined"
             style={styles.inputBox}
             placeholder="Enter registered email"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+            textColor="#1e1e1e"
+            theme={{ colors: { primary: '#1e1e1e' } }}
           />
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           {success ? <Text style={styles.successText}>{success}</Text> : null}
 
-          <Pressable
-            style={[styles.button, loading && styles.disabledButton]}
+
+          <Button
+            mode="elevated"
             onPress={handleSubmit}
+            loading={loading}
             disabled={loading}
+            style={[styles.button, loading && styles.disabledButton]}
+            labelStyle={{ color: '#fff', fontSize: 16 }}
           >
-            <Text style={styles.buttonText}>
-              {loading ? 'Sending...' : 'Send Reset Code'}
-            </Text>
-          </Pressable>
+            {loading ? 'Sending...' : 'Send Reset Code'}
+          </Button>
 
           <Pressable
             style={styles.link}
             onPress={() => navigation.goBack()}
           >
-            <Text style={styles.linkText}>Back to Login</Text>
+            <Text variant='labelLarge' style={styles.linkText}>Back to Login</Text>
           </Pressable>
         </View>
         <View/>
@@ -81,16 +89,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#ABD1B5'
   },
   header: {
-    fontSize: 25,
     textAlign: "center",
     fontWeight: "500",
     marginBottom: 35,
+    color: '#000'
   },
   inputBox: {
-    backgroundColor: '#EDF4ED',
+    backgroundColor: "#EDF4ED",
     marginBottom: 10,
-    borderRadius: 8,
-    padding: 12
+    borderRadius: 0,
+    elevation: 5
   },
   subtitle: {
     fontSize: 14,
@@ -101,9 +109,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#301014',
     alignItems: 'center',
-    padding: 15,
-    borderRadius: 25,
-    marginVertical: 10
+    marginTop: 10
   },
   disabledButton: {
     backgroundColor: '#5a5a5a'
@@ -118,8 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   linkText: {
-    color: '#51291E',
-    fontSize: 14
+    color: '#51291E'
   },
   errorText: {
     color: 'red',

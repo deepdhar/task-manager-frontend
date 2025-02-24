@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  TextInput,
-  Button,
-  Text,
   StyleSheet,
   Pressable,
   StatusBar,
@@ -11,6 +8,7 @@ import {
 import { useRouter } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { TextInput, Button, Text } from "react-native-paper";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -35,40 +33,54 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#9088f1" />
-      <Text style={styles.header}>Login</Text>
-      <Text style={styles.subtitle}>Email</Text>
+      <Text variant="headlineSmall" style={styles.header}>Login</Text>
+      
       <TextInput
+        label='Email'
+        mode="outlined"
         style={styles.inputBox}
         placeholder="name@email.com"
-        placeholderTextColor={'#1e1e1e'}
+        placeholderTextColor={'gray'}
         value={email}
         onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType='email-address'
+        textColor="#1e1e1e"
+        theme={{ colors: { primary: '#1e1e1e',  background: '#EDF4ED'  } }}
       />
-      <Text style={styles.subtitle}>Password</Text>
+      
       <TextInput
+        label='Password'
+        mode="outlined"
         style={styles.inputBox}
         placeholder="password"
-        placeholderTextColor={'#1e1e1e'}
+        placeholderTextColor={'gray'}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        autoCapitalize="none"
+        textColor="#1e1e1e"
+        theme={{ colors: { primary: '#1e1e1e', accent: '#EDF4ED' } }}
       />
-      <Pressable 
-        style={[styles.button, loading && styles.disabledButton]} 
+      <Button
+        mode="elevated"
         onPress={handleLogin}
+        loading={loading}
         disabled={loading}
+        style={[styles.button, loading && styles.disabledButton]}
+        labelStyle={{ color: '#1e1e1e', fontSize: 16 }}
       >
-        <Text style={{ color: "#1e1e1e", fontSize: 16, fontWeight: "600" }}>
-          {loading ? 'Logging in...' : 'Login now'}
-        </Text>
-      </Pressable>
+        {loading ? 'Logging in...' : 'Login now'}
+      </Button>
       <Text
+        variant="labelLarge"
         style={[styles.subtitle, { textAlign: "center" }]}
         onPress={() => navigation.navigate("Signup")}
       >
-        Don't have an account? <Text style={{ color: "#fff", fontWeight: '600' }}>Sign up</Text>
+        Don't have an account? <Text style={{ color: "#fff", fontWeight: '700' }}>Sign up</Text>
       </Text>
       <Text
+        variant="labelLarge"
         style={[styles.subtitle, { textAlign: "center", color: "#1e1e1e" }]}
         onPress={() => navigation.navigate("ForgotPassword")}
       >
@@ -80,10 +92,9 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   button: {
+    width: '100%',
     backgroundColor: "#dcf881",
     alignItems: "center",
-    padding: 15,
-    borderRadius: 25,
     marginVertical: 10,
   },
   container: {
@@ -96,7 +107,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#bcbfb0'
   },
   header: {
-    fontSize: 25,
     textAlign: "center",
     fontWeight: "500",
     marginBottom: 25,
@@ -105,11 +115,9 @@ const styles = StyleSheet.create({
   inputBox: {
     backgroundColor: "#EDF4ED",
     marginBottom: 10,
-    borderRadius: 8,
-    padding: 12,
+    elevation: 5
   },
   subtitle: {
-    fontSize: 14,
     marginBottom: 5,
     color: "#fefefe",
     fontWeight: "500",

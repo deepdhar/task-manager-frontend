@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "task-manager-frontend",
+    "name": "task manager",
     "slug": "task-manager-frontend",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.deep.taskmanagement",
-      "versionCode": 1
+      "versionCode": 3
     },
     "web": {
       "bundler": "metro",

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { IconButton } from 'react-native-paper';
+import { TextInput, Button, Text } from "react-native-paper";
 
 // const API_URL = "http://192.168.1.8:5000";
 const API_URL = "https://task-manager-backend-k9tk.onrender.com";
@@ -43,38 +45,53 @@ export default function AddTaskScreen() {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: 10}}>
-        <Pressable onPress={()=>navigation.goBack()}>
-          <Ionicons name="arrow-back-outline" size={30} color="white" />
-        </Pressable>
-        <Text style={styles.header}>Add Task</Text>
+        <IconButton
+          icon="arrow-left"
+          size={30}
+          onPress={() => navigation.goBack()}
+          style={{margin: 0, marginLeft: -5}}
+          iconColor="#fff"
+          theme={{colors: {primary: '#000'}}}
+        />
+        <Text style={styles.header} variant="headlineMedium">Add Task</Text>
         <View style={{width: 30}}/>
       </View>
 
       <View>
-        <Text style={styles.subtitle}>Title</Text>
+        
         <TextInput
+          label='Title'
+          mode="outlined"
           style={styles.inputBox}
           placeholder="Title"
           value={title}
           onChangeText={setTitle}
+          textColor="#1e1e1e"
+          theme={{ colors: { primary: '#1e1e1e',  background: '#EDF4ED'  } }}
         />
-        <Text style={styles.subtitle}>Description</Text>
+        
         <TextInput
+          label='Description'
+          mode="outlined"
           style={styles.inputBox}
           placeholder="Description"
           value={description}
           onChangeText={setDescription}
+          textColor="#1e1e1e"
+          theme={{ colors: { primary: '#1e1e1e',  background: '#EDF4ED'  } }}
         />
       </View>
-      <Pressable 
+
+      <Button
+        mode="elevated"
         onPress={handleAddTask}
-        style={[styles.button, loading && styles.disabledButton]}
+        loading={loading}
         disabled={loading}
+        style={[styles.button, loading && styles.disabledButton]}
+        labelStyle={{ color: '#1e1e1e', fontSize: 16 }}
       >
-        <Text style={styles.buttonText}>
-          {loading ? "Adding..." : "Add"}
-        </Text>
-      </Pressable>
+        {loading ? "Adding..." : "Add"}
+      </Button>
     </View>
   );
 }
@@ -83,14 +100,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#dcf881",
     alignItems: "center",
-    padding: 15,
-    borderRadius: 25,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "#1e1e1e",
-    fontSize: 16,
-    fontWeight: "600",
+    marginBottom: 10,
   },
   container: {
     flex: 1,
@@ -102,15 +112,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#bcbfb0'
   },
   header: {
-    fontSize: 25,
-    fontWeight: "500",
+    // fontSize: 25,
+    fontWeight: '700',
     color: '#fff000'
   },
   inputBox: {
     backgroundColor: "#EDF4ED",
     marginBottom: 10,
-    borderRadius: 8,
-    padding: 12,
+    borderRadius: 0,
+    elevation: 5
   },
   subtitle: {
     fontSize: 15,
